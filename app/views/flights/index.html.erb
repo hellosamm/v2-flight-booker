@@ -1,6 +1,5 @@
 <h1>Flight Search</h1>
 
-<h2>list of flights:</h2>
 <% @flights.each do |f| %>
 <p>
   <%= f.departure_airport.name %> <br>
@@ -30,28 +29,32 @@
 
 
 <h1>Search Results:</h1>
-<table>
-  <th>
-    <tr>
-        <th>Departure Airport</th>
-        <th>Arrival Airport</th>
-        <th>Start Time</th>
-        <th>Duration</th>
+
+<%= form_with url: bookings_path, method: :post do |f|%>
+  <table>
+    <th>
+      <tr>
+          <th>Departure Airport</th>
+          <th>Arrival Airport</th>
+          <th>Start Time</th>
+          <th>Duration</th>
+        </tr>
+    </th>
+  <tbody>
+    <% if @search_results.any? %>
+      <% @search_results.each do |f| %>
+      <tr>
+        <td> <%= form.radio_button :flight_id, f.id %> </td>
+        <td><%= f.departure_airport.code %></td>
+        <td><%= f.arrival_airport.code %></td>
+        <td><%= f.start_time %></td>
+        <td> <%= (f.duration/60).to_i %>hr <%= f.duration % 60 %> minutes</td>
       </tr>
-  </th>
-<tbody>
-  <% if @search_results.any? %>
-  <% @search_results.each do |f| %>
-  <tr>
-    <td><%= f.departure_airport.code %></td>
-    <td><%= f.arrival_airport.code %></td>
-    <td><%= f.start_time %></td>
-    <td> <%= (f.duration/60).to_i %>hr <%= f.duration % 60 %> minutes</td>
-  </tr>
+      <% end %>
+    </tbody>
+    </table>
+  
+  <% else %>
+    <p> No flights match your critera</p>
   <% end %>
-</tbody>
-</table>
- 
-<% else %>
-  <p> No flights match your critera</p>
 <% end %>
