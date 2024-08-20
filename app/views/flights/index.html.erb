@@ -1,2 +1,46 @@
 <h1>Flights#index</h1>
 <p>Find me in app/views/flights/index.html.erb</p>
+
+<% @airports.each do |f| %>
+  <%= f.name %> 
+  <%= f.code %> <br>
+<% end %> 
+
+
+<h2>list of flights:</h2>
+<% @flights.each do |f| %>
+<p>
+  <%= f.departure_airport.name %> <br>
+  <%= f.arrival_airport.name %> <br>
+  <%= f.start_time %> <br>
+  <%= (f.duration/60).to_i %>hr <%= f.duration % 60 %> min <br> 
+
+  </p>
+<% end %> 
+
+
+<%= form_with method: "get" do |form| %>
+  <div>
+     <%= form.label :departure_airport_airport_id, "Arrival Airport" %>
+    <%= form.select :departure_airport_id, options_from_collection_for_select(@airports, :id, :code), { include_blank: "Select Departure Airport" } %>
+  </div>
+  <div>
+    <%= form.label :arrival_airport_id, "Arrival Airport" %>
+    <%= form.select :arrival_airport_id, options_from_collection_for_select(@airports, :id, :code), { include_blank: "Select Arrival Airport" } %>
+  </div>
+
+   <div>
+    <%= form.label :start_time, "Departure Date" %>
+    <%= form.select :start_time, options_from_collection_for_select(@flights, :id, :start_time), { include_blank: "Select Departure Date" } %>
+  </div>
+
+    <div>
+    <%= form.label :passengers, "Number of Passengers" %>
+    <%= form.select :passengers, options_for_select((1..8).to_a) %>
+  </div>
+  <%= form.submit %>
+<% end %>
+
+
+<%= form%>
+
