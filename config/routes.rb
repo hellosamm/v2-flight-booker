@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+ resources :bookings, only: [:new, :create]
   root "flights#index"
   get 'search', to: 'flights#index'
-  get 'booking_path', to: 'bookings#new'
+  # get 'booking_path', to: 'bookings#new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

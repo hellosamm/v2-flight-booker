@@ -27,34 +27,43 @@
   <%= form.submit 'Search Flights' %>
 <% end %>
 
-
+<%= @flight_params %>
 <h1>Search Results:</h1>
 
-<%= form_with url: bookings_path, method: :post do |f|%>
+<%= form_with url: new_booking_path, method: :get do |f|%>
   <table>
-    <th>
+    <thead>
       <tr>
+          <th>Select</th>
           <th>Departure Airport</th>
           <th>Arrival Airport</th>
           <th>Start Time</th>
           <th>Duration</th>
         </tr>
-    </th>
+    </thead>
   <tbody>
     <% if @search_results.any? %>
-      <% @search_results.each do |f| %>
+      <% @search_results.each do |flight| %>
       <tr>
-        <td> <%= form.radio_button :flight_id, f.id %> </td>
-        <td><%= f.departure_airport.code %></td>
-        <td><%= f.arrival_airport.code %></td>
-        <td><%= f.start_time %></td>
-        <td> <%= (f.duration/60).to_i %>hr <%= f.duration % 60 %> minutes</td>
+        <td><%= f.radio_button :flight_id, f.id %> </td>
+        <td><%= flight.departure_airport.code %></td>
+        <td><%= flight.arrival_airport.code %></td>
+        <td><%= flight.formatted_start_time %></td>
+        <td> <%= (flight.duration/60).to_i %>hr <%= flight.duration % 60 %> minutes</td>
       </tr>
       <% end %>
+
+    <% else %>
+      <p> No flights match your critera</p>
+    <% end %>
+
     </tbody>
     </table>
-  
-  <% else %>
-    <p> No flights match your critera</p>
+    
+
+  <%= f.submit "Select Flight" %>
   <% end %>
-<% end %>
+
+
+
+
