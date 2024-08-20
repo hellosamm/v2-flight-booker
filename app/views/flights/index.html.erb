@@ -29,14 +29,29 @@
 <% end %>
 
 
-
-<% if @search_results.any? %>
+<h1>Search Results:</h1>
+<table>
+  <th>
+    <tr>
+        <th>Departure Airport</th>
+        <th>Arrival Airport</th>
+        <th>Start Time</th>
+        <th>Duration</th>
+      </tr>
+  </th>
+<tbody>
+  <% if @search_results.any? %>
   <% @search_results.each do |f| %>
-    <p>Departure Airport: <%= f.departure_airport.code %></p>
-    <p>Arrival Airport:<%= f.arrival_airport.code %></p>
-    <p>Start Time:<%= f.start_time %></p>
-    <p>Duration: <%= (f.duration/60).to_i %>hr <%= f.duration % 60 %> minutes</p>
+  <tr>
+    <td><%= f.departure_airport.code %></td>
+    <td><%= f.arrival_airport.code %></td>
+    <td><%= f.start_time %></td>
+    <td> <%= (f.duration/60).to_i %>hr <%= f.duration % 60 %> minutes</td>
+  </tr>
   <% end %>
+</tbody>
+</table>
+ 
 <% else %>
   <p> No flights match your critera</p>
 <% end %>
