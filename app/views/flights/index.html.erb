@@ -45,11 +45,11 @@
     <% if @search_results.any? %>
       <% @search_results.each do |flight| %>
       <tr>
-        <td><%= f.radio_button :flight_id, f.id %> </td>
+        <td><%= f.radio_button :flight_id, flight.id %> </td>
         <td><%= flight.departure_airport.code %></td>
         <td><%= flight.arrival_airport.code %></td>
         <td><%= flight.formatted_start_time %></td>
-        <td> <%= (flight.duration/60).to_i %>hr <%= flight.duration % 60 %> minutes</td>
+        <td><%= (flight.duration / 60).to_i %>hr <%= flight.duration % 60 %> minutes</td>
       </tr>
       <% end %>
 

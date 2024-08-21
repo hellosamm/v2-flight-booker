@@ -1,3 +1,40 @@
 <h1>Bookings#new</h1>
 <p>Find me in app/views/bookings/new.html.erb</p>
-<%= @flight_params %>
+  <table>
+    <thead>
+      <tr>
+          <th>Departure Airport</th>
+          <th>Arrival Airport</th>
+          <th>Start Time</th>
+          <th>Duration</th>
+        </tr>
+    </thead>
+  <tbody>
+        <td><%= @flight.departure_airport.code %></td>
+        <td><%= @flight.arrival_airport.code %></td>
+        <td><%= @flight.formatted_start_time %></td>
+        <td> <%= (@flight.duration/60).to_i %>hr <%= @flight.duration % 60 %> minutes</td>
+      </tr>
+    </tbody>
+    </table>
+
+
+
+<%= form_with model: @booking, local: true do |f|%>
+  <%= f.hidden_field :flight_id, value: @flight.id%>
+
+  <div>
+    <%= f.label :passenger_name, "Name"%>
+    <%= f.text_field :passenger_name%>
+  </div>
+
+   <div>
+    <%= f.label :passenger_email, "Email"%>
+    <%= f.text_field :passenger_name, place_holder: "Enter your full name" %>
+  </div>
+
+  <div>
+    <%= f.submit "Confirm Booking" %>
+  </div>
+<% end %>
+
