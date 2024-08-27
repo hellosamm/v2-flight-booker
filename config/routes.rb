@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
- resources :bookings, only: [:new, :create]
+
+  
   root "flights#index"
   get 'search', to: 'flights#index'
+
+  resources :bookings, only: [:new, :create, :show] do
+    resources :passengers, only: [:new, :create] # Nested resources for passengers
+  end
+
+  resources :flights, only: [] do
+    resources :bookings, only: [:new, :create]
+  end
+
+  
   # get 'booking_path', to: 'bookings#new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

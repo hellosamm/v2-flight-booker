@@ -24,17 +24,23 @@
   <%= f.hidden_field :flight_id, value: @flight.id%>
 
   <div>
-    <%= f.label :passenger_name, "Name"%>
-    <%= f.text_field :passenger_name%>
+    <%= f.label :flight_id, "Flight ID" %>
+    <%= f.text_field :flight_id, value: @flight.id, readonly: true %>
   </div>
 
-   <div>
-    <%= f.label :passenger_email, "Email"%>
-    <%= f.text_field :passenger_name, place_holder: "Enter your full name" %>
-  </div>
+  <%= f.fields_for :passengers do |pf| %>
+    <div>
+      <%= pf.label :name, "Name"%>
+      <%= pf.text_field :name, placeholder: "Enter your full name"%>
+    </div>
+
+    <div>
+      <%= pf.label :email, "Email"%>
+      <%= pf.text_field :email, placeholder: "Enter your email" %>
+    </div>
+  <% end %>
 
   <div>
     <%= f.submit "Confirm Booking" %>
   </div>
 <% end %>
-
