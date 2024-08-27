@@ -1,4 +1,6 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :show]
+
   def new
     @flight = Flight.find(params[:flight_id])
     @booking = Booking.new(flight: @flight)
