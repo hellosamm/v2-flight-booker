@@ -1,3 +1,20 @@
 
 
-<%= @booking.flight_id %>
+<%= @booking.flight_id %> <br>
+
+<%= @flight.formatted_start_time%> <br>
+<%= @flight.departure_airport.code%> <br>
+<%= @flight.arrival_airport.code%> <br>
+
+<% @passengers.each do |passenger| %>
+  <p>
+    <strong>Name:</strong>
+    <%= passenger.name %> <!-- Display passenger name -->
+  </p>
+  <p>
+    <strong>Email:</strong>
+    <%= passenger.email %> <!-- Display passenger email -->
+  </p>
+<% end %>
+
+<%= link_to 'home', root_path %>
