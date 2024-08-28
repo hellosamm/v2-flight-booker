@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
+    @booking = current_user.booking.new(booking_params)
 
     if @booking.save
       flash[:notice] = "Your Flight Was Booked"
