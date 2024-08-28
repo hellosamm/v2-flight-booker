@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bookings
+
+  def show
+    @user = User.find(params[:id])
+  end
 end

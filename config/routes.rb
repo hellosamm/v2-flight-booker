@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   root "flights#index"
   get 'search', to: 'flights#index'
+  resources :users, only: [:show]
 
   resources :bookings, only: [:new, :create, :show] do
     resources :passengers, only: [:new, :create] # Nested resources for passengers

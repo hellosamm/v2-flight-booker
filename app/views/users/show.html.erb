@@ -1,0 +1,13 @@
+<h2>View your flights</h2>
+
+
+<% @bookings.each do |b| %>
+  <%= b.flight.formatted_start_time %>
+  <%= b.flight.departure_airport.code%> -->
+  <%= b.flight.arrival_airport.code%> 
+  <%= button_to 'Flight Info', booking_path(b), method: :get %>
+
+  ____________________________________ <br>
+
+
+<% end %>
