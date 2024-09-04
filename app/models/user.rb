@@ -6,7 +6,5 @@ class User < ApplicationRecord
 
   has_many :bookings
 
-  def show
-    @user = User.find(params[:id])
-  end
+  validates :name, presence: true
 end

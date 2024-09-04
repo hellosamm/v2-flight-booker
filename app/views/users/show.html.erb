@@ -1,7 +1,7 @@
 <h2>View your flights</h2>
 
 
-<% @bookings.each do |b| %>
+<% @bookings_as_passenger.each do |b| %>
   <%= b.flight.formatted_start_time %>
   <%= b.flight.departure_airport.code%> -->
   <%= b.flight.arrival_airport.code%> 

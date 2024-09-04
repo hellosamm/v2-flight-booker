@@ -25,6 +25,9 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @flight = @booking.flight
     @passengers = @booking.passengers
+
+    @all_bookings = Booking.joins(:passengers).where(passengers: { email: current_user.email })
+    @current_user_flights = @all_bookings.map(&:flight).uniq
   end
   
 

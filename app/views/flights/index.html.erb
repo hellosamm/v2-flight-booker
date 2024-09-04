@@ -1,11 +1,5 @@
 <h1>Flight Search</h1>
 
-<% @flights.each do |f| %>
-<p>
-  <%= f.departure_airport.name %> <br>
-  <%= f.arrival_airport.name %> <br>
-  </p>
-<% end %> 
 
 <%= form_with(url: search_path, method: "get", local: true) do |form| %>
   <div>
